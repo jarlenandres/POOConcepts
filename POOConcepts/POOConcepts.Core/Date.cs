@@ -90,14 +90,19 @@ public class Date
         }
 
         // Validate if the day and month
-        if ((day >= 1 && day <= 28 && Month == 2) ||
-                (day >= 1 && day <= 30 && (Month == 4 || Month == 6 || Month == 9 || Month == 11)) ||
-                (day >= 1 && day <= 31 && (Month == 1 || Month == 3 || Month == 5 || Month == 7 || Month == 8 || Month == 9 || Month == 12)))
+        int maxDay = Month switch
+        {
+            2 => IsLeapYear(Year) ? 29 : 28,
+            4 or 6 or 9 or 11 => 30,
+            _ => 31,
+        };
+
+        if (day >= 1 && day <= maxDay)
         {
             return day;
         }
 
-            throw new Exception($"El día {day}, no es valido para el mes: {Month} y el año: {Year}");
+        throw new Exception($"El día {day}, no es valido para el mes: {Month} y el año: {Year}");
     }
 
 }
