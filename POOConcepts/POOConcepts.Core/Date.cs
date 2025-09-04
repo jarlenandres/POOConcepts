@@ -89,7 +89,7 @@ public class Date
             return day;
         }
 
-        // Validate if the day and month
+        // Validate the day and month
         int maxDay = Month switch
         {
             2 => IsLeapYear(Year) ? 29 : 28,
